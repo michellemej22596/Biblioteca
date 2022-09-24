@@ -12,6 +12,14 @@ private String id;
 private String name;
 private String address;
 private int borrowedItems;
+
+public Customer( String c_id,String c_name, String c_address, int c_borrowedItems) {
+	this.setId( c_id);
+	this.setName( c_name);
+	this.setAddress(c_address);
+	this.setBorrowedItems(c_borrowedItems);
+	
+}
 /**
  * @return the id
  */

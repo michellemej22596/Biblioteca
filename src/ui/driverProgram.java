@@ -8,6 +8,7 @@ import java.util.Scanner;
 
 import model.Article;
 import model.Book;
+import model.Customer;
 import model.Document;
 import model.Magazine;
 /**
@@ -23,6 +24,7 @@ public class driverProgram {
 		// TODO Auto-generated method stub
 	
 		ArrayList<Document> Documentos = new ArrayList<Document>();
+		ArrayList<Customer> Clientes = new ArrayList<Customer>();
 		
 System.out.println("¡Bienvenido al programa!");
 		
@@ -109,14 +111,53 @@ while (!option1.equals("8")) {
 				
 			case "4":{
 				System.out.println("*********************");
+				System.out.println("Por favor ingresa los siguientes datos acerca del cliente que desea realizar un préstamo");
+				System.out.println("Id: ");
+				String c_id = entrada.nextLine();
+				System.out.println("Nombre: ");
+				String c_name = entrada.nextLine();
+				System.out.println("Dirección: ");
+				String c_address = entrada.nextLine();
+				Customer customer= new Customer(c_id, c_name, c_address, 0);
+				Clientes.add(customer);
+				System.out.println("El cliente se ha añadido con éxito.");
+				
+				String flag = "si";
+				while (customer.getBorrowedItems()<5 && flag.equals("si")) {
+					System.out.println("¿Cuál es el título del documento que desea prestar?");
+					String _title = entrada.nextLine();
+					if (BorrowDocument(_title, Documentos)) {
+						System.out.println("El préstamo se ha realizado con éxito");
+						customer.setBorrowedItems(customer.getBorrowedItems()+1);
+						
+				}else {
+					System.out.println("Lamentablemente ha habido un error al solicitar el préstamo, esto puede occurrir si el número de préstamos activos del cliente supera los 5 o si no existen ejemplares disponibles.");
+				}
+					System.out.println("¿Desea realizar otro préstamo para este cliente? si/no");
+					flag = entrada.nextLine();
+				}
+				
 				}break;
 				
 			case "5":{
 				System.out.println("*********************");
+				System.out.println("Ingrese el Id del cliente que realizó el retorno");
+				String c_id = entrada.nextLine();
+				Customer cliente= searchCustomerByID(c_id, Clientes);
+				cliente.setBorrowedItems(cliente.getBorrowedItems()-1);
+				System.out.println("Ingrese el Id del documento que fue retornado");
+				String codigo = entrada.nextLine();
+				Document docBuscado = searchByID(codigo, Documentos);
+				docBuscado.setStockQty(docBuscado.getStockQty()+1);
+				
 				}break;
 				
 			case "6":{
 				System.out.println("*********************");
+				System.out.println("Ingrese el Id del cliente que desea buscar");
+				String c_id = entrada.nextLine();
+				Customer cliente= searchCustomerByID(c_id, Clientes);
+				System.out.println(cliente.getName()+" posee "+cliente.getBorrowedItems()+" préstamos activos.");
 				}break;
 				
 			case "7":{
@@ -151,6 +192,16 @@ public static Document searchByID(String id, ArrayList<Document> libreria) {
 	return null;
 }
 
+public static Customer searchCustomerByID(String id, ArrayList<Customer> Clientela) {
+	for (Customer cliente: Clientela) {
+		if (cliente.getId().equals(id)) {
+			return cliente;
+		}
+	}
+	
+	return null;
+}
+
 public static int countBySubject(String subject, ArrayList<Document> libreria) {
 	int contador= 0;
 	for (Document buscado: libreria) {
@@ -172,6 +223,17 @@ public static int countStock(String title, ArrayList<Document> libreria) {
 	}
 	
 	return contador;
+}
+
+public static boolean BorrowDocument(String title, ArrayList<Document> libreria) {
+		for (Document buscado: libreria) {
+		if (buscado.getTitle().equals(title) && buscado.getStockQty()>0){
+			buscado.setStockQty(buscado.getStockQty()-1);
+			return true;
+		}
+	}
+	
+	return false;
 }
 	
 	public static void menu(){
