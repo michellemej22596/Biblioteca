@@ -5,7 +5,7 @@ package model;
 
 /**
  * @author Michelle Mejía
- *
+ *Modela revistas, hereda atributos y métodos de documentos
  */
 public class Magazine extends Document {
 	

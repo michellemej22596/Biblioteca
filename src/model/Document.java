@@ -5,7 +5,10 @@ package model;
 
 /**
  * @author Michelle Mejía
- *
+ *Clase documento
+ *Es nuestra clase modelo principal, de esta se heredan los libros, revistas y artículos
+ *Posee atributos como ID, título, materia y cantidad de ejemplares.
+ *Posee setters y getters como método
  */
 public class Document {
 
@@ -13,7 +16,6 @@ public class Document {
 	protected String title;
 	protected String subject;
 	protected int stockQty;
-	protected boolean available;
 	/**
 	 * @return the id
 	 */
@@ -62,18 +64,5 @@ public class Document {
 	public void setStockQty(int stockQty) {
 		this.stockQty = stockQty;
 	}
-	/**
-	 * @return the available
-	 */
-	public boolean isAvailable() {
-		return available;
-	}
-	/**
-	 * @param available the available to set
-	 */
-	public void setAvailable(boolean available) {
-		this.available = available;
 	}
 	
-	
-}

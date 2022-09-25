@@ -5,7 +5,8 @@ package model;
 
 /**
  * @author Michelle Mejía
- *
+ *Modela a los clientes de la biblioteca
+ *Posee Id, nombre, dirección y número de préstamos como atributos
  */
 public class Customer {
 private String id;

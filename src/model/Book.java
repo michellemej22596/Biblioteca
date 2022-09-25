@@ -5,7 +5,7 @@ package model;
 
 /**
  * @author Michelle Mejía
- *
+ *Modela libros, hereda atributos y métodos de documentos
  */
 public class Book extends Document {
 private String editorial;
