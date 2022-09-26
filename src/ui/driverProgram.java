@@ -303,9 +303,9 @@ public static Customer searchCustomerByID(String id, ArrayList<Customer> Cliente
 public static int countBySubject(String subject, ArrayList<Document> libreria) {
 	int contador= 0;
 	for (Document buscado: libreria) {
+		System.out.println(buscado.getSubject());
 		if (buscado.getSubject().equals(subject)) {
 			contador ++;
-			return contador;
 		}
 	}
 	
